@@ -1,4 +1,9 @@
-<h1 align="center">Hi, I'm Srija Malhar 👋</h1>
+[README-3.md](https://github.com/user-attachments/files/31438800/README-3.md)
+<p align="center">
+  <a href="#">
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=28&pause=1000&color=2F81F7&center=true&vCenter=true&width=500&lines=Hi%2C+I'm+Srija+Malhar" alt="Typing SVG" />
+  </a>
+</p>
 <p align="center">Building Correct, Concurrent Backend Systems</p>
 <p align="center">Backend engineering focused on transactional correctness • Full-stack delivery • AI-assisted developer tooling</p>
 
@@ -12,36 +17,75 @@ I build backend systems where correctness under concurrency isn't an afterthough
 
 ## Featured Projects
 
-### [MiniBee](#) — Subscription Billing & Invoicing Microservice
+###  [MiniBee](#) — Subscription Billing & Invoicing Microservice
+*The flagship project — correctness proven under concurrency, not just assumed.*
+
 A Chargebee/Stripe-Billing-style service where invoice generation is idempotent per subscription and billing period, even under concurrent or re-fired requests.
 
 **Problem:** Billing systems fail expensively when a race condition or retried job produces the same invoice twice. Application-level checks alone can't close that race.
-**Built with:** Java 17, Spring Boot 3.3, Spring Data JPA, MySQL/PostgreSQL, Redis, Kafka, JUnit 5 + Testcontainers, Docker
+
+**Built with:** Java 17 · Spring Boot 3.3 · Spring Data JPA · MySQL/PostgreSQL · Redis · Kafka · JUnit 5 + Testcontainers · Docker
+
 **Engineering:** Idempotency is enforced with a database-level `UNIQUE(subscription_id, billing_period)` constraint rather than an application check — proven under a 20-thread concurrent integration test. Events are published via a transactional outbox to avoid the dual-write problem, and plan changes are prorated through an explicit subscription state machine.
+
+<details>
+<summary><b>View architecture diagram</b></summary>
+
+```mermaid
+flowchart TD
+    Client["HTTP client / X-API-Key"] --> Controllers["Controllers / DTOs at boundary"]
+    Controllers --> Services["Services / rules, @Transactional"]
+    Proration["Proration + state machine"] --> Services
+    Services --> Repositories["Repositories / Spring Data JPA"]
+    Repositories --> DB[("MySQL / PostgreSQL / uk_invoice_sub_period")]
+    Repositories --> Outbox["outbox_events / same transaction"]
+    Redis["Redis cache / evict-on-write"] --> Services
+    Outbox --> Relay["OutboxRelay / polls, publishes"]
+    Relay --> Kafka["Kafka"]
+    Scheduler["BillingScheduler to BillingRunner / daily, idempotent"] --> DB
+```
+
+</details>
+
 **Repository:** _add link_
+
+---
 
 ### [CodeSheriff](https://github.com/SrijaMalhar/codesheriff) — Automated GitHub PR Reviewer
 An LLM-powered PR reviewer that posts inline comments on the exact diff line, with a feedback loop that improves future reviews.
 
 **Problem:** Manual PR review doesn't scale, and most automated linters miss cross-file context.
-**Built with:** Python, FastAPI/Uvicorn, Google Gemini API, GitHub Webhooks, SQLite, GitHub Actions
+
+**Built with:** Python · FastAPI/Uvicorn · Google Gemini API · GitHub Webhooks · SQLite · GitHub Actions
+
 **Engineering:** Runs an async background queue so the webhook responds instantly while review happens out-of-band, and a shadow mode lets the reviewer analyze PRs silently before it's trusted to post. A thumbs-up/down feedback loop is stored and exportable for tuning review quality over time.
+
 **Repository:** [github.com/SrijaMalhar/codesheriff](https://github.com/SrijaMalhar/codesheriff)
 
-### [Supply Chain Parts Traceability Dashboard](#) — Parts Tracking & Inventory Dashboard
+---
+
+### [Supply Chain Parts Traceability Dashboard](https://srijamalhar.github.io/supply-chain-dashboard/) — Parts Tracking & Inventory Dashboard
 Tracks spare parts from supplier → warehouse → assembly → deployed, with supplier health, audit logs, and inventory valuation.
 
 **Problem:** Manufacturing supply chains need real-time visibility into where a part is and what it's worth at each stage.
-**Built with:** React 18 + Vite, Spring Boot 3 (Java 17), H2, Docker Compose, Swagger/OpenAPI
+
+**Built with:** React 18 + Vite · Spring Boot 3 (Java 17) · H2 · Docker Compose · Swagger/OpenAPI
+
 **Engineering:** Optimistic UI updates with rollback on error, plus live duplicate-part detection while adding new inventory — small details that make the dashboard feel responsive rather than form-driven.
-**Repository:** [srijamalhar.github.io/supply-chain-dashboard](https://srijamalhar.github.io/supply-chain-dashboard/)
+
+**Repository:** [srijamalhar.github.io/supply-chain-dashboard](https://srijamalhar.github.io/supply-chain-dashboard/) · **Live demo available**
+
+---
 
 ### [Predictive Warranty Claim Engine](#) — Rules-Based Warranty Risk Validation
 Applies manufacturing-style warranty rules to flag high-risk claims for heavy machinery, with an explainable risk indicator rather than a black-box score.
 
 **Problem:** Warranty fraud and abuse detection needs to be explainable to a claims team, not just accurate.
-**Built with:** Java 17, Spring Boot 3.2, Spring Data JPA, React + Tailwind, H2 (Postgres-compatible mode)
+
+**Built with:** Java 17 · Spring Boot 3.2 · Spring Data JPA · React + Tailwind · H2 (Postgres-compatible mode)
+
 **Engineering:** Separates a stateless "preview" validation endpoint from the persisting "submit" endpoint, so a claim's eligibility and risk score can be checked live before anything is written — with rejections returning a structured `422` rather than a generic error.
+
 **Repository:** _add link_
 
 ---
@@ -93,7 +137,7 @@ Applies manufacturing-style warranty rules to flag high-risk claims for heavy ma
 
 ---
 
-
 ## Connect
 
 - GitHub: [@SrijaMalhar](https://github.com/SrijaMalhar)
+- LinkedIn: [Srija Malhar](https://www.linkedin.com/in/srija-malhar-252525ss)

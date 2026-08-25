@@ -72,11 +72,9 @@ flowchart TD
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=SrijaMalhar&layout=compact&hide_border=true" alt="Top Languages" height="165"/>
 </p>
 
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=SrijaMalhar&color=blue&style=flat-square&label=PROFILE+VIEWS" alt="Profile Views"/>
-</p>
 
-## Connect
+
+## Let's Connect
 
 <p align="left">
   <a href="https://github.com/SrijaMalhar">

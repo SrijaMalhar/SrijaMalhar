@@ -93,13 +93,7 @@ Applies manufacturing-style warranty rules to flag high-risk claims for heavy ma
 
 ---
 
-## Coding Activity
-
-[![LeetCode Stats](https://leetcard.jacoblin.cool/Srija_malhar18?theme=light&font=baloo2&ext=heatmap)](https://leetcode.com/Srija_malhar18/)
-
----
 
 ## Connect
 
 - GitHub: [@SrijaMalhar](https://github.com/SrijaMalhar)
-- LeetCode: [Srija_malhar18](https://leetcode.com/Srija_malhar18/)
